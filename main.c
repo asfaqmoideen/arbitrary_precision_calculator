@@ -1,7 +1,7 @@
-#include "sll.h"
 #include "apc.h"
 #include<stdio.h>
 #include<string.h>
+#include"dll.h"
 
 int main(int argc, char *argv[]){
 
@@ -19,43 +19,40 @@ int main(int argc, char *argv[]){
     }
 
     
+    Dlist *l_head, *l_tail, *r_head, *r_tail, *res_head, *res_tail;
     printf("The input arguments are correct !\n");
-    Slist * l_operand = create_list(argv[1]);
-    Slist * r_operand = create_list(argv[3]);
+    create_list(argv[1], &l_head, &l_tail);
+    create_list(argv[3], &r_head, &r_tail);
 
     printf("Left : ");
-    print_list(l_operand);
+    print_list(l_head);
     printf("Right : ");
-    print_list(r_operand);
+    print_list(r_head);
     
     printf("Let me try to ");
 
-    Slist *result = NULL;
     switch (argv[2][0])
     {
         case '+':
         printf("Add !\n");
-        result = add_lists(l_operand,r_operand);
+        add_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail);
         break;
-        case '-':
-        printf("Subtract !\n");
-        result = subtract_lists(l_operand, r_operand);
-        break;
-        case '*':
-        result = multiply_lists(l_operand, r_operand);
-        break;
-        case '/':
-        result = divide_lists(l_operand, r_operand);
-        break;
-
+        // case '-':
+        // printf("Subtract !\n");
+        // result = subtract_lists(l_operand, r_operand);
+        // break;
+        // case '*':
+        // result = multiply_lists(l_operand, r_operand);
+        // break;
+        // case '/':
+        // result = divide_lists(l_operand, r_operand);
+        // break;
+        
         default:
         break;
     }  
     
-    if(result == NULL){
-        printf("Failed to perform the operation");
-    }
-
-    print_list(result);
+    
+    print_list(r_head);
     return 0;
 }

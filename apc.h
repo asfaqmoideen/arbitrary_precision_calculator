@@ -1,14 +1,14 @@
 #ifndef APC_H
 #define APC_H
 
-#include"sll.h"
+#include"dll.h"
 
-Slist* create_list(char *input);
+#define SUCCESS 0
+#define FAILURE -1
 
-Slist* add_lists(Slist* op1, Slist* op2);
-Slist* subtract_lists(Slist* op1, Slist* op2);
-Slist* multiply_lists(Slist* op1, Slist* op2);
-Slist* divide_lists(Slist* op1, Slist* op2);
 
+int create_list(char *input, Dlist **head, Dlist **tail);
+
+int add_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist **res_head, Dlist **res_tail);
 
 #endif 
