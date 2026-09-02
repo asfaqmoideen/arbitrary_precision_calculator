@@ -11,7 +11,6 @@ int dl_insert_first(Dlist **head, Dlist **tail, int data)
         return FAILURE;
     }
     
-    printf()
     new_node->data = data;
     new_node->prev = NULL;
     
@@ -69,17 +68,16 @@ void print_list(Dlist *head)
 	}
 	else
 	{
-	    printf("Head -> ");
 	    while (head)		
 	    {
 		    /* Printing the list */
-		    printf("%d <-", head -> data);
+		    printf("%d", head -> data);
 
 		    /* Travering in forward direction */
 		    head = head -> next;
-		    if (head)
-		        printf("> ");
 	    }
-    	printf(" Tail\n");
+
     }
+
+    printf("\n");
 }

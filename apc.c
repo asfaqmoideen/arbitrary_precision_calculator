@@ -4,24 +4,25 @@
 
 int create_list(char *input, Dlist **head, Dlist **tail){
 
-    *head = NULL;
-    *tail = NULL;
-
     int len = strlen(input);
+    while (*input == '0' && *(input + 1) != '\0') {
+        input++;
+    }
 
+    while (*input != '\0') {
+        int n = *input - '0'; 
 
-    for(int i = 0 ; i < len ; i++){
-        int num = input[i] - 48;
-
-        if(dl_insert_last(head, tail, num) == FAILURE){
+        if (dl_insert_last(head, tail, n) == FAILURE) {
             printf("Memory Allocation Failure\n");
             return FAILURE;
-        };
+        }
+        input++;
     }
 
 
     return SUCCESS;
 }
+
 
 int add_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist **res_head, Dlist **res_tail){
 
@@ -33,7 +34,6 @@ int add_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist *
     int carry = 0;
     while (l_tail != NULL || r_tail != NULL)
     {   
-        printf("l: %d, r: %d\n",l_tail->data, r_tail->data );
 
         int num1 = l_tail == NULL ? 0 : l_tail->data;
         int num2 = r_tail == NULL ? 0 : r_tail->data;
@@ -43,7 +43,6 @@ int add_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist *
         num = num%10;
         
         
-        printf("l: %d, r: %d\n",l_tail->data, r_tail->data );
         dl_insert_first(res_head, res_tail , num);
         
         if (l_tail != NULL) l_tail = l_tail->prev;
@@ -51,46 +50,50 @@ int add_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist *
 
     }
 
-    dl_insert_first(res_head, res_tail , carry);
+    if(carry){
+        dl_insert_first(res_head, res_tail , carry);
+    }
+
     return SUCCESS;
 }
 
-// Slist* subtract_lists(Slist* op1, Slist* op2){
+int subtract_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist **res_head, Dlist **res_tail){
 
-//     if(op1 == NULL || op2 == NULL){
-//         return NULL;
-//     }
+    int diff = 0, neg_flag = 0;
+    while (l_tail != NULL || r_tail != NULL)
+    {   
+        int num1 = l_tail == NULL ? 0 : l_tail->data;
+        int num2 = r_tail == NULL ? 0 : r_tail->data;
 
-//     Slist *l_temp = op1, *r_temp = op2, *result = NULL;
-//     int borrow = 0;
 
-//     while (l_temp != NULL || r_temp != NULL)
-//     {   
-//         printf("Borrow : %d", borrow);
-//         int num1 = l_temp == NULL ? 0 : l_temp->data;
-//         int num2 = r_temp == NULL ? 0 : r_temp->data;
+        if(num1 < num2){
 
-//         if(borrow){
-//             num1--;
-//             borrow = 0;
-//         }
+            if(l_tail->prev != NULL){
+                l_tail->prev->data--;
+                num1+=10;
+            }
+            else{
+                int temp = num2;
+                num2 = num1;
+                num1 = temp;
+                neg_flag = 1;
+            }
+        }
 
-//         if(num1 < num2){
-//             borrow = 1;
-//             num1+=10;
-//         }
-
-//         int diff = num1 - num2;
-//         printf("Diff : %d\n", diff);
-//         insert_at_first(&result, diff);
+        printf("num1 : %d num2 %d ", num1, num2);
+        diff = num1 - num2;
+        printf("Diff : %d\n", diff);
+        if(neg_flag) diff = -diff;
+        if(dl_insert_first(res_head,res_tail, diff) == FAILURE){
+            printf("Memory allocation failure");
+            return FAILURE;
+        }
         
-//         if (l_temp != NULL) l_temp = l_temp->link;
-//         if (r_temp != NULL) r_temp = r_temp->link;
+        if (l_tail != NULL) l_tail = l_tail->prev;
+        if (r_tail != NULL) r_tail = r_tail->prev;
 
-//     }
+    }
 
-//     // insert_at_first(&result, carry);
-
-//     return result;
+    return SUCCESS;
     
-// }
+}
