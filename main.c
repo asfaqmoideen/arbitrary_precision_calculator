@@ -20,6 +20,7 @@ int main(int argc, char *argv[]){
 
     
     Dlist *l_head = NULL, *l_tail = NULL, *r_head=NULL, *r_tail=NULL, *res_head = NULL, *res_tail = NULL;
+
     printf("The input arguments are correct !\n");
     create_list(argv[1], &l_head, &l_tail);
     create_list(argv[3], &r_head, &r_tail);
@@ -44,9 +45,12 @@ int main(int argc, char *argv[]){
         // case '*':
         // result = multiply_lists(l_operand, r_operand);
         // break;
-        // case '/':
-        // result = divide_lists(l_operand, r_operand);
-        // break;
+        case '/':
+        printf("Divide !\n");
+        if(divide_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){
+            return -1;
+        };
+        break;
         
         default:
         break;
