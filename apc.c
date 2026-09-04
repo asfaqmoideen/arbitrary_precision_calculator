@@ -2,6 +2,7 @@
 #include<string.h>
 #include"dll.h"
 #include"apc.h"
+#include <stdlib.h>
 
 int create_list(char *input, Dlist **head, Dlist **tail){
 
@@ -94,6 +95,8 @@ int subtract_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dl
     (*res_head)->data = -((*res_head)->data);
     }
 
+    remove_leading_zeros(res_head,res_tail);
+
     return SUCCESS;
     
 }
@@ -123,14 +126,14 @@ int compare_lists(Dlist *l_head, Dlist *r_head) {
 
 
 int divide_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist **res_head, Dlist **res_tail){
-    
+
+
     if((r_head)->data == 0){
         printf("Invalid input !\n");
         return FAILURE;
     }
 
     int comp = compare_lists(l_head, r_head);
-
     if(comp == -1){
         create_list("0", res_head, res_tail);
         return SUCCESS;
@@ -138,17 +141,16 @@ int divide_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlis
     else if(comp == 0){
         create_list("1", res_head, res_tail);
         return SUCCESS;
-
+        
     }
-
-    int num1 = l_tail == NULL ? 0 : l_tail->data;
-    int num2 = r_tail == NULL ? 0 : r_tail->data;
-
+    
     Dlist *out_l_head = l_head;
     Dlist *out_l_tail = l_tail;
-
+    
     int count = 0;
-    while(compare_lists(out_l_head, r_head) >= 0){
+
+    while( compare_lists(out_l_head, r_head) >= 0){
+
         Dlist *out_res_head = NULL , *out_res_tail = NULL;
 
         subtract_lists(out_l_head, out_l_tail, r_head, r_tail, &out_res_head, &out_res_tail);
@@ -165,4 +167,23 @@ int divide_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlis
     }
 
     return SUCCESS;
+}
+
+int mulitpy_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist **res_head, Dlist **res_tail){
+
+    if((r_head)->data == 0){
+         create_list("0", res_head, res_tail);
+        return SUCCESS;
+    }
+
+
+}
+
+void remove_leading_zeros(Dlist **head, Dlist **tail) {
+    while (*head != NULL && (*head)->data == 0 && (*head)->next != NULL) {
+        Dlist *temp = *head;
+        *head = (*head)->next;
+        (*head)->prev = NULL;
+        free(temp);
+    }
 }
