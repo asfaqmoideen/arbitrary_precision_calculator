@@ -15,6 +15,7 @@ typedef struct node
 
 int dl_insert_first(Dlist **head, Dlist **tail, int data);
 int dl_insert_last(Dlist **head, Dlist **tail, int data);
+int dl_delete_list(Dlist **head, Dlist **tail);
 void print_list(Dlist *head);
 
 #endif

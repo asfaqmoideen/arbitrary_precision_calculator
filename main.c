@@ -9,7 +9,7 @@ int main(int argc, char *argv[]){
         printf("*********** APC ************\n");
         printf("Input format 'Operand 1' 'Operator' 'Operator 2'\n");
         printf("Example : 123413242 + 24123411234\n");
-        printf("Operators - '+' , '-', '*', '%%'\n");
+        printf("Operators - '+' , '-', '*', '/'\n");
         return -1;
     }   
 
@@ -42,9 +42,12 @@ int main(int argc, char *argv[]){
         printf("Subtract !\n");
         subtract_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail);
         break;
-        // case '*':
-        // result = multiply_lists(l_operand, r_operand);
-        // break;
+        case '*':
+        printf("Multiply !\n");
+        if(mulitpy_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){
+            return -1;
+        };
+        break;
         case '/':
         printf("Divide !\n");
         if(divide_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){

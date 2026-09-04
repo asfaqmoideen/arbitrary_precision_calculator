@@ -60,7 +60,7 @@ int dl_insert_last(Dlist **head, Dlist **tail, int data)
 }
 
 void print_list(Dlist *head)
-{
+{   
 	/* Cheking the list is empty or not */
 	if (head == NULL)
 	{
@@ -80,4 +80,23 @@ void print_list(Dlist *head)
     }
 
     printf("\n");
+}
+
+int dl_delete_list(Dlist **head, Dlist **tail)
+{
+    if (*head == NULL) {
+            return FAILURE;
+        }
+
+        while ((*head)->next != NULL) {
+            *head = (*head)->next; 
+            free((*head)->prev);   
+        }
+
+        free(*head);
+
+        *head = NULL;
+        *tail = NULL;
+
+        return SUCCESS;
 }

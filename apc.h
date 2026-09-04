@@ -21,5 +21,7 @@ int compare_lists(Dlist *l_head, Dlist *r_head);
 /* Removed the leading zeros for the given double linked list*/
 void remove_leading_zeros(Dlist **head, Dlist **tail);
 
+int multiply_single_number(int num, Dlist* node_tail, Dlist **res_head, Dlist **res_tail);
+
 
 #endif 
