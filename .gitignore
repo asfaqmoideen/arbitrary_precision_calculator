@@ -1,2 +1,6 @@
 a.out
 a.exe
+final
+*.exe
+*.o
+.vscode/

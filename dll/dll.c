@@ -1,4 +1,4 @@
-#include "dll.h"
+#include "../include/dll.h"
 #include<stdio.h>
 #include<stdlib.h>
 

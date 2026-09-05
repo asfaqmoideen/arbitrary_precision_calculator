@@ -20,7 +20,7 @@ int mulitpy_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dli
 int compare_lists(Dlist *l_head, Dlist *r_head);
 /* Removed the leading zeros for the given double linked list*/
 void remove_leading_zeros(Dlist **head, Dlist **tail);
-
+/* stores the product of given number multiplied by each node of given linked list*/
 int multiply_single_number(int num, Dlist* node_tail, Dlist **res_head, Dlist **res_tail);
 
 

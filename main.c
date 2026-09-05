@@ -1,7 +1,7 @@
-#include "apc.h"
 #include<stdio.h>
 #include<string.h>
-#include"dll.h"
+#include "include/apc.h"
+#include "include/dll.h"
 
 int main(int argc, char *argv[]){
 
@@ -21,45 +21,49 @@ int main(int argc, char *argv[]){
     
     Dlist *l_head = NULL, *l_tail = NULL, *r_head=NULL, *r_tail=NULL, *res_head = NULL, *res_tail = NULL;
 
-    printf("The input arguments are correct !\n");
-    create_list(argv[1], &l_head, &l_tail);
-    create_list(argv[3], &r_head, &r_tail);
+    if(create_list(argv[1], &l_head, &l_tail) == FAILURE){
+        printf("Memory allocation failure");
+        return -1;
+    }
 
-    printf("Left : ");
-    print_list(l_head);
-    printf("Right : ");
-    print_list(r_head);
+    if(create_list(argv[3], &r_head, &r_tail) == FAILURE){
+        printf("Memory allocation failure\n");
+        return -1;
+    }
     
-    printf("Let me try to ");
 
     switch (argv[2][0])
     {
         case '+':
-        printf("Add !\n");
-        add_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail);
+        if(add_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){
+            printf("Memory allocation failure\n");
+            return -1;
+        };
         break;
         case '-':
-        printf("Subtract !\n");
-        subtract_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail);
+        if(subtract_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){
+            printf("Memory allocation failure\n");
+            return -1;
+        };
         break;
         case '*':
-        printf("Multiply !\n");
         if(mulitpy_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){
+            printf("Failed to perform operation\n");
             return -1;
         };
         break;
         case '/':
-        printf("Divide !\n");
         if(divide_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){
+            printf("Failed to perform operation\n");
             return -1;
         };
         break;
-        
-        default:
-        break;
     }  
     
-    
     print_list(res_head);
+
+    dl_delete_list(&l_head, &l_tail);
+    dl_delete_list(&r_head, &r_tail);
+    dl_delete_list(&res_head,&res_tail );
     return 0;
 }
