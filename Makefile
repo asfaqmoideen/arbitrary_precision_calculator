@@ -4,11 +4,11 @@ OBJS = $(patsubst %.c, %.o, $(SRCS))
 
 CFLAGS = -Iinclude -g
 
-final: $(OBJS)
-	gcc -o final $(OBJS)
+apc: $(OBJS)
+	gcc -o apc $(OBJS)
 
 %.o: %.c
 	gcc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f final.exe $(OBJS)
+	rm -f apc.exe $(OBJS)

@@ -14,8 +14,6 @@ A C-based command-line calculator that performs arithmetic operations (`+`, `-`,
 
 ## Directory Layout
 
-Plaintext
-
 ```
 APC/
 ├── dll/
@@ -33,7 +31,7 @@ APC/
 ├── .gitignore
 ├── Makefile            # Build configuration script
 ├── main.c              # Entry point and CLI parser
-└── final               # Compiled executable output
+└── apc                 # Compiled executable output
 ```
 
 ## Getting Started
@@ -64,12 +62,12 @@ make clean
 
 ## Usage
 
-Run the compiled executable `final` by passing two operands and an operator as command-line arguments:
+Run the compiled executable `apc` by passing two operands and an operator as command-line arguments:
 
 Bash
 
 ```
-./final <Operand_1> <Operator> <Operand_2>
+./apc <Operand_1> <Operator> <Operand_2>
 ```
 
 ### Supported Operators
@@ -78,7 +76,7 @@ Bash
 
 `-` : Subtraction
 
-`*` : Multiplication
+`'*'` : Multiplication
 
 `/` : Division
 
@@ -89,7 +87,7 @@ Bash
 Bash
 
 ```
-./final 123456789123456789 + 987654321987654321
+./apc 123456789123456789 + 987654321987654321
 ```
 
 **Subtraction:**
@@ -97,7 +95,7 @@ Bash
 Bash
 
 ```
-./final 100000000000000000000 - 1
+./apc 100000000000000000000 - 1
 ```
 
 **Multiplication:**
@@ -105,7 +103,7 @@ Bash
 Bash
 
 ```
-./final 999999999999 * 888888888888
+./apc 999999999999 '*' 888888888888
 ```
 
 **Division:**
@@ -113,5 +111,5 @@ Bash
 Bash
 
 ```
-./final 1000000000000 / 500000
+./apc 1000000000000 / 500000
 ```

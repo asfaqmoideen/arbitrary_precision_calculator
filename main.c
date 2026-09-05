@@ -21,6 +21,7 @@ int main(int argc, char *argv[]){
     
     Dlist *l_head = NULL, *l_tail = NULL, *r_head=NULL, *r_tail=NULL, *res_head = NULL, *res_tail = NULL;
 
+    // creating linked lists from the user input
     if(create_list(argv[1], &l_head, &l_tail) == FAILURE){
         printf("Memory allocation failure");
         return -1;
@@ -31,7 +32,7 @@ int main(int argc, char *argv[]){
         return -1;
     }
     
-
+    // selecting the operation based on user's input arg. 
     switch (argv[2][0])
     {
         case '+':
@@ -62,6 +63,7 @@ int main(int argc, char *argv[]){
     
     print_list(res_head);
 
+    // frees the memory upon successfull operation
     dl_delete_list(&l_head, &l_tail);
     dl_delete_list(&r_head, &r_tail);
     dl_delete_list(&res_head,&res_tail );
