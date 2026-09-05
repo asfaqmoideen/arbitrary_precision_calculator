@@ -1,7 +1,7 @@
-#include "sll.h"
-#include "apc.h"
 #include<stdio.h>
 #include<string.h>
+#include "include/apc.h"
+#include "include/dll.h"
 
 int main(int argc, char *argv[]){
 
@@ -9,7 +9,7 @@ int main(int argc, char *argv[]){
         printf("*********** APC ************\n");
         printf("Input format 'Operand 1' 'Operator' 'Operator 2'\n");
         printf("Example : 123413242 + 24123411234\n");
-        printf("Operators - '+' , '-', '*', '%%'\n");
+        printf("Operators - '+' , '-', '*', '/'\n");
         return -1;
     }   
 
@@ -19,43 +19,51 @@ int main(int argc, char *argv[]){
     }
 
     
-    printf("The input arguments are correct !\n");
-    Slist * l_operand = create_list(argv[1]);
-    Slist * r_operand = create_list(argv[3]);
+    Dlist *l_head = NULL, *l_tail = NULL, *r_head=NULL, *r_tail=NULL, *res_head = NULL, *res_tail = NULL;
 
-    printf("Left : ");
-    print_list(l_operand);
-    printf("Right : ");
-    print_list(r_operand);
+    if(create_list(argv[1], &l_head, &l_tail) == FAILURE){
+        printf("Memory allocation failure");
+        return -1;
+    }
+
+    if(create_list(argv[3], &r_head, &r_tail) == FAILURE){
+        printf("Memory allocation failure\n");
+        return -1;
+    }
     
-    printf("Let me try to ");
 
-    Slist *result = NULL;
     switch (argv[2][0])
     {
         case '+':
-        printf("Add !\n");
-        result = add_lists(l_operand,r_operand);
+        if(add_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){
+            printf("Memory allocation failure\n");
+            return -1;
+        };
         break;
         case '-':
-        printf("Subtract !\n");
-        result = subtract_lists(l_operand, r_operand);
+        if(subtract_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){
+            printf("Memory allocation failure\n");
+            return -1;
+        };
         break;
         case '*':
-        result = multiply_lists(l_operand, r_operand);
+        if(mulitpy_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){
+            printf("Failed to perform operation\n");
+            return -1;
+        };
         break;
         case '/':
-        result = divide_lists(l_operand, r_operand);
-        break;
-
-        default:
+        if(divide_lists(l_head, l_tail, r_head, r_tail, &res_head, &res_tail) == FAILURE){
+            printf("Failed to perform operation\n");
+            return -1;
+        };
         break;
     }  
     
-    if(result == NULL){
-        printf("Failed to perform the operation");
-    }
+    print_list(res_head);
 
-    print_list(result);
+    dl_delete_list(&l_head, &l_tail);
+    dl_delete_list(&r_head, &r_tail);
+    dl_delete_list(&res_head,&res_tail );
     return 0;
 }
