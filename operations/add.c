@@ -16,6 +16,19 @@ int add_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist *
         return FAILURE;
     }
 
+    int is_addable = !(l_head->sign ^ r_head->sign);
+    
+    if(is_addable){
+        return add(l_head, l_tail, r_head, r_tail, res_head, res_tail);
+    }
+    
+    return subtract(l_head, l_tail, r_head, r_tail, res_head, res_tail);
+
+}
+
+int add(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist **res_head, Dlist **res_tail){
+    
+    int resulting_sign = l_head->sign && r_head->sign;
     int carry = 0;
     while (l_tail != NULL || r_tail != NULL)
     {   
@@ -38,6 +51,8 @@ int add_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist *
     if(carry){
         dl_insert_first(res_head, res_tail , carry);
     }
+
+    (*res_head)->sign = resulting_sign;
 
     return SUCCESS;
 }

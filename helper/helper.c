@@ -12,6 +12,16 @@ Description : Arbitrary Precision Calculator (APC)
 
 int create_list(char *input, Dlist **head, Dlist **tail){
 
+    int sign = 0;
+
+    if(*input == '-'){
+        sign = NEGATIVE;
+        input++;
+    }else if(*input == '+'){
+        sign = POSITIVE;
+        input++;
+    }
+
     int len = strlen(input);
     while (*input == '0' && *(input + 1) != '\0') {
         input++;
@@ -27,6 +37,9 @@ int create_list(char *input, Dlist **head, Dlist **tail){
         input++;
     }
 
+    if(*head != NULL){
+        (*head)->sign = sign;
+    }
     return SUCCESS;
 }
 
@@ -66,4 +79,31 @@ void remove_leading_zeros(Dlist **head, Dlist **tail) {
         (*head)->prev = NULL;
         free(temp);
     }
+}
+
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int is_valid_input(const char *str) {
+    if (str == NULL || *str == '\0') {
+        return 0; 
+    }
+
+    if (*str == '-' || *str == '+') {
+        str++;
+    }
+
+    if (*str == '\0') {
+        return 0; 
+    }
+
+    while (*str != '\0') {
+        if (!isdigit((unsigned char)*str)) {
+            return 0; 
+        }
+        str++;
+    }
+
+    return 1; 
 }

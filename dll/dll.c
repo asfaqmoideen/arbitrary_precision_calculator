@@ -72,7 +72,10 @@ void print_list(Dlist *head)
 		printf("INFO : List is empty\n");
 	}
 	else
-	{
+	{   
+        if(head->sign == NEGATIVE) {
+            printf("%c", '-');
+        }
 	    while (head)		
 	    {
 		    /* Printing the list */

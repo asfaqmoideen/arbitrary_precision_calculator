@@ -20,7 +20,7 @@ int mulitpy_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dli
     
     if(create_list("0", res_head, res_tail)== FAILURE){
         return FAILURE;
-    };
+    }
 
     int count = 0;                                             
     while(r_tail != NULL){
@@ -41,7 +41,7 @@ int mulitpy_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dli
         Dlist *sum_head = NULL;
         Dlist *sum_tail = NULL;
 
-        if(add_lists(temp_res_head, temp_res_tail, *res_head, *res_tail, &sum_head, &sum_tail) == FAILURE){
+        if(add(temp_res_head, temp_res_tail, *res_head, *res_tail, &sum_head, &sum_tail) == FAILURE){
             return FAILURE;
         }
 
@@ -55,6 +55,7 @@ int mulitpy_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dli
         count++;
     }
 
+    (*res_head)->sign = l_head->sign ^ r_head->sign;
     return SUCCESS;
 }
 

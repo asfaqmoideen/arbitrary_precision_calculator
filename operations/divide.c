@@ -51,5 +51,7 @@ int divide_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlis
         count /= 10;
     }
 
+    (*res_head)->sign = l_head->sign ^ r_head->sign;
+    
     return SUCCESS;
 }

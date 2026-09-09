@@ -11,12 +11,22 @@ Description : Arbitrary Precision Calculator (APC)
 int main(int argc, char *argv[]){
 
     if(argc < 4){
-        printf("*********** APC ************\n");
-        printf("Input format 'Operand 1' 'Operator' 'Operator 2'\n");
+        printf("Error: Input format 'Operand 1' 'Operator' 'Operand 2'\n");
         printf("Example : 123413242 + 24123411234\n");
         printf("Operators - '+' , '-', '*', '/'\n");
         return -1;
     }   
+
+    if (!is_valid_input(argv[1])) {
+        printf("Error: Invalid first operand '%s'. Only numeric digits are allowed.\n", argv[1]);
+        return 1;
+    }
+
+    if (!is_valid_input(argv[3])) {
+        printf("Error: Invalid second operand '%s'. Only numeric digits are allowed.\n", argv[3]);
+        return 1;
+    }
+
 
     if (argv[2][0] != '+' && argv[2][0] != '-' && argv[2][0] != '*' && argv[2][0] != '/') {
         printf("Only '+', '-', '*', '/', are operated\n");

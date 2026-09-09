@@ -13,11 +13,16 @@ Description : Arbitrary Precision Calculator (APC)
 #define LIST_EMPTY -2
 #define DATA_NOT_FOUND -3
 
-typedef struct node
-{
-	int data;
-	struct node *prev;
-	struct node *next;
+typedef enum isNegative {
+    POSITIVE,
+	NEGATIVE
+} Sign;
+
+typedef struct node {
+    int data;
+    struct node *prev;
+    struct node *next;
+    Sign sign;
 }Dlist;
 
 int dl_insert_first(Dlist **head, Dlist **tail, int data);
