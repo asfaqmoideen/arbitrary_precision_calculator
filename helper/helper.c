@@ -1,3 +1,9 @@
+/* -----------------------------------------------------------------------------------------
+Author Name : Asfaq Moideen
+Description : Arbitrary Precision Calculator (APC)
+--------------------------------------------------------------------------------------------*/
+
+
 #include<stdio.h>
 #include<string.h>
 #include "../include/apc.h"
@@ -21,7 +27,6 @@ int create_list(char *input, Dlist **head, Dlist **tail){
         input++;
     }
 
-
     return SUCCESS;
 }
 
@@ -29,8 +34,14 @@ int compare_lists(Dlist *l_head, Dlist *r_head) {
     int len1 = 0, len2 = 0;
     Dlist *l_temp = l_head, *r_temp = r_head;
 
-    while (l_temp != NULL) { len1++; l_temp = l_temp->next; }
-    while (r_temp != NULL) { len2++; r_temp = r_temp->next; }
+    while (l_temp != NULL) { 
+        len1++; 
+        l_temp = l_temp->next; 
+    }
+    while (r_temp != NULL) {
+        len2++; 
+        r_temp = r_temp->next; 
+    }
 
     if (len1 > len2) return 1;
     if (len1 < len2) return -1;

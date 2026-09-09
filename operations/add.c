@@ -1,3 +1,8 @@
+/* -----------------------------------------------------------------------------------------
+Author Name : Asfaq Moideen
+Description : Arbitrary Precision Calculator (APC)
+--------------------------------------------------------------------------------------------*/
+
 #include<stdio.h>
 #include<string.h>
 #include "../include/apc.h"
@@ -17,11 +22,11 @@ int add_lists(Dlist *l_head, Dlist *l_tail, Dlist *r_head, Dlist *r_tail,Dlist *
 
         int num1 = l_tail == NULL ? 0 : l_tail->data;
         int num2 = r_tail == NULL ? 0 : r_tail->data;
+
         int num = num1 + num2 + carry;
         
         carry = num/10;
         num = num%10;
-        
         
         dl_insert_first(res_head, res_tail , num);
         

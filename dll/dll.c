@@ -1,3 +1,8 @@
+/* -----------------------------------------------------------------------------------------
+Author Name : Asfaq Moideen
+Description : Arbitrary Precision Calculator (APC)
+--------------------------------------------------------------------------------------------*/
+
 #include "../include/dll.h"
 #include<stdio.h>
 #include<stdlib.h>
